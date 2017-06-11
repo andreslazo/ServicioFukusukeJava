@@ -5,7 +5,7 @@
  */
 package Service;
 
-import DAO.ClienteDAO;
+import DAO.ClientesDAO;
 import java.util.ArrayList;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -29,7 +29,7 @@ public class ServiciosFukusuke {
     
     @WebMethod(operationName = "getDatosCliente")
     public static String getDatosCliente(@WebParam(name = "idCliente") int idCliente) {
-        ClienteDAO cliente=new ClienteDAO();
+        ClientesDAO cliente=new ClientesDAO();
         ArrayList<String> arreglo;
         arreglo=cliente.Leer(idCliente);
         return "Los datos del cliente con id: "+idCliente+" son " + arreglo;
