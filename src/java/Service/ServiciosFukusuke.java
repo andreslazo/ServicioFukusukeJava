@@ -44,9 +44,6 @@ public class ServiciosFukusuke {
     
     @WebMethod(operationName = "setPedido")
     public boolean setPedido(@WebParam(name = "user") String user,@WebParam(name = "idMenu") int idMenu) {
-        //sacar precio del menu listo
-        //sacar sucursal del menu listo
-        //sacar el id del cliente listo
         try{
             PromocionesDAO menues=new PromocionesDAO();
             ClientesDAO clientes=new ClientesDAO();
@@ -54,7 +51,7 @@ public class ServiciosFukusuke {
             int idSucursal=menues.ObtenerSucursal(idMenu);
             int idCliente=clientes.ObtenerId(user);
             Date fecha=new Date(1995, 8, 24);
-            Ventas venta=new Ventas(3, 12334, precio, 0, 0, fecha , fecha , 1, idSucursal, idCliente);
+            Ventas venta=new Ventas(3, 12334, precio, 0, 0, fecha , fecha ,1, 1, idSucursal, idCliente);
             
             VentasDAO ventas=new VentasDAO();
             return ventas.Insertar(venta);
@@ -74,13 +71,13 @@ public class ServiciosFukusuke {
     
     @WebMethod(operationName = "setEstadoPedido")
     public boolean setEstadoPedido(@WebParam(name = "codigoPedido") int codigoPedido,@WebParam(name = "estado") int estado) {
-        //TO DO
-        return false;
+        VentasDAO ventas=new VentasDAO();
+        return ventas.cambiarEstado(estado,codigoPedido);
     }
     
     @WebMethod(operationName = "getEstadoPedido")
     public int getEstadoPedido(@WebParam(name = "codigoPedido") int codigoPedido) {
-        //TO DO
-        return 0;
+        VentasDAO ventas=new VentasDAO();
+        return ventas.obtenerEstado(codigoPedido);
     }
 }
