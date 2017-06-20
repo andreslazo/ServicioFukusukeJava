@@ -39,7 +39,7 @@ public class ServiciosFukusuke {
         ClientesDAO cliente=new ClientesDAO();
         JSONArray arreglo;
         arreglo=cliente.Leer(usuario);
-        return arreglo.toString();
+        return "{ \"usuarios\": "+arreglo.toString()+"}";
     }
     
     @WebMethod(operationName = "setPedido")
@@ -50,8 +50,8 @@ public class ServiciosFukusuke {
             int precio=menues.ObtenerPrecio(idMenu);
             int idSucursal=menues.ObtenerSucursal(idMenu);
             int idCliente=clientes.ObtenerId(user);
-            Date fecha=new Date(1995, 8, 24);
-            Ventas venta=new Ventas(3, 12334, precio, 0, 0, fecha , fecha ,1, 1, idSucursal, idCliente);
+            Date fecha=new Date(95, 8, 24);
+            Ventas venta=new Ventas(12334, precio, 0, 0, fecha , fecha ,1, 1, idSucursal, idCliente);
             
             VentasDAO ventas=new VentasDAO();
             return ventas.Insertar(venta);
@@ -66,7 +66,13 @@ public class ServiciosFukusuke {
         PromocionesDAO promociones=new PromocionesDAO();
         JSONArray arreglo;
         arreglo=promociones.LeerTodo();
-        return arreglo.toString();
+        return "{ \"menus\": "+arreglo.toString()+"}";
+    }
+    
+    @WebMethod(operationName = "getIdMenu")
+    public int getIdMenu(@WebParam(name = "descripcion") String descripcion) {
+        PromocionesDAO promociones=new PromocionesDAO();
+        return promociones.obtenerID(descripcion);
     }
     
     @WebMethod(operationName = "setEstadoPedido")
